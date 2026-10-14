@@ -8,6 +8,9 @@ void accembler(struct processor * proc, const char * name_r, const char * name_w
     int * jumps = (int *)calloc(10, sizeof(int));
     for (int i = 0; i < 10; ++i) jumps[i] = -1;
     pre_jump(jumps, name_r);
+    
+    for (int i = 0; i < 10; ++i) printf("%d ", jumps[i]);
+    printf("\n");
 
     char operation[20] = {};
     int x = 0;
@@ -86,21 +89,54 @@ void accembler(struct processor * proc, const char * name_r, const char * name_w
             proc->code[pos] = jumps[pr];
         }
 
-        if (!strcmp(operation, "IN")){
+        if (!strcmp(operation, "JE")){
             proc->code[pos] = 10;
+            pos += 1;
+
+            int chto = 0;
+            fscanf(file_r, " %d", &chto);
+            proc->code[pos] = chto;
+
+            pos += 1;
+            int usl = 0;
+            fscanf(file_r, " %d", &usl);
+            proc->code[pos] = usl;
+            
+            pos += 1;
+            int pr = 0;
+            fscanf(file_r, " %d", &pr);
+            proc->code[pos] = jumps[pr];
+            
+            fprintf(file_w, "10 %d %d %d\n",chto, usl, pr);
+
         }
 
-        if (!strcmp(operation, "CALL")){
+        if (!strcmp(operation, "JAE")){
             proc->code[pos] = 11;
         }
 
-        if (!strcmp(operation, "RET")){
+        if (!strcmp(operation, "JBE")){
             proc->code[pos] = 12;
         }
 
+        if (!strcmp(operation, "JNE")){
+            proc->code[pos] = 13;
+        }
 
-        
+        if (!strcmp(operation, "IN")){
+            proc->code[pos] = 14;
+        }
 
+        if (!strcmp(operation, "CALL")){
+            proc->code[pos] = 15;
+        }
+
+        if (!strcmp(operation, "RET")){
+            proc->code[pos] = 16;
+        }
+
+
+    
         pos += 1;
     }
 

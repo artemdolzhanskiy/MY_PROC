@@ -1,6 +1,7 @@
 PUSH 1
 POPr 1
 : 1
+JE 1 10 2
 PUSHr 1
 PUSHr 1
 MUL
@@ -10,4 +11,5 @@ PUSH 1
 ADD
 POPr 1
 JMP 1
+: 2
 HLT

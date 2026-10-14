@@ -7,22 +7,28 @@
 #include "stack.h"
 
 enum proc_operation{
-    HLT = 0,
-    PUSH = 1,
-    ADD = 2,
-    SUB = 3,
-    DIV = 4,
-    OUT = 5,
-    POPr = 6,
+    HLT   = 0,
+    PUSH  = 1,
+    ADD   = 2,  // +
+    SUB   = 3,  // -
+    DIV   = 4,  // /
+    OUT   = 5,
+    POPr  = 6,
     PUSHr = 7,
-    MUL = 8,
-    JMP = 9
+    MUL   = 8,  // *
+    JMP   = 9,
+    JE    = 10,  // ==
+    JAE   = 11, // >=
+    JBE   = 12, // <=
+    JNE   = 13, // !=
+    IN    = 14, 
+    CALL  = 15,
+    RET   = 16,
 };
 
 struct processor{
     int code[50];
     int reg[10];
-    enum proc_operation operation;
     struct stack * stk;
 };
 
